@@ -1,0 +1,461 @@
+:root {
+  /* Tema padrão (Azul) */
+  --inatel: #01579b;
+  --header-bg: #fff;
+  --header-item-bg: #b2ebf2;
+  --mensagens-bg: #fff;
+  --mensagens-icon: #f48fb1;
+  --aulas-bg: #fff;
+  --aulas-item-bg: #a5d6a7;
+  --aulas-action-bg: #81c784;
+  --noticias-bg: #fff;
+  --noticias-card-bg: #ef9a9a;
+  --dot-active: #ef5350;
+}
+
+[data-theme="dark"] {
+  --inatel: #ffffff;
+  --header-bg: #263238;
+  --header-item-bg: #37474f;
+  --mensagens-bg: #263238;
+  --mensagens-icon: #6a1b9a;
+  --aulas-bg: #263238;
+  --aulas-item-bg: #2e7d32;
+  --aulas-action-bg: #388e3c;
+  --noticias-bg: #263238;
+  --noticias-card-bg: #c62828;
+  --dot-active: #f44336;
+  color: #ffffff;
+}
+
+[data-theme="pastel"] {
+  --inatel: #01579b;
+  --header-bg: #e7e7e7;
+  --header-item-bg: #bbdefb;
+  --mensagens-bg: #e7e7e7;
+  --mensagens-icon: #e1bee7;
+  --aulas-bg: #e7e7e7;
+  --aulas-item-bg: #c8e6c9;
+  --aulas-action-bg: #a5d6a7;
+  --noticias-bg: #e7e7e7;
+  --noticias-card-bg: #ffcdd2;
+  --dot-active: #ef9a9a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  transition: background-color 0.3s ease;
+  margin: 20px;
+}
+
+[data-theme="dark"] body {
+  background-color: #121212;
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Theme selector */
+.theme-selector {
+  position: fixed;
+  top: 20;
+  right: 20px;
+  z-index: 1000;
+}
+
+.theme-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.theme-icon:hover {
+  transform: scale(1.1);
+}
+
+[data-theme="dark"] .theme-icon {
+  background-color: #333;
+  color: #fff;
+}
+
+.theme-dropdown {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  width: 200px;
+  display: none;
+}
+
+[data-theme="dark"] .theme-dropdown {
+  background-color: #333;
+  color: #fff;
+}
+
+.theme-dropdown.show {
+  display: block;
+}
+
+.theme-option {
+  display: flex;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.theme-option:hover {
+  background-color: #f0f0f0;
+}
+
+[data-theme="dark"] .theme-option:hover {
+  background-color: #444;
+}
+
+.theme-option.active {
+  background-color: #e0e0e0;
+}
+
+[data-theme="dark"] .theme-option.active {
+  background-color: #555;
+}
+
+.theme-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.theme-color-default {
+  background: linear-gradient(to bottom right, #e0f7fa, #81c784);
+}
+
+.theme-color-dark {
+  background: linear-gradient(to bottom right, #263238, #1b5e20);
+}
+
+.theme-color-pastel {
+  background: linear-gradient(to bottom right, #e3f2fd, #e8f5e9);
+}
+
+.theme-label {
+  flex-grow: 1;
+}
+
+/* Layout base para mobile */
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "header"
+    "mensagens"
+    "aulas"
+    "noticias";
+  gap: 0;
+}
+
+/* Estilos das seções */
+.header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 15px;
+  background-color: var(--header-bg);
+  transition: background-color 0.3s ease;
+  max-height: 100px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.svg_logo_inatel {
+  height: 80%;
+  path {
+    fill: var(--inatel);
+  }
+}
+
+.header-logo {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header-item {
+  border: 1px solid #333;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--header-item-bg);
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.header-item::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  border: 1px solid #333;
+  opacity: 0.5;
+}
+
+.header-item::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  opacity: 0.3;
+}
+
+.mensagens {
+  grid-area: mensagens;
+  background-color: var(--mensagens-bg);
+  padding: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.greeting {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.message-item {
+  border: 1px solid #333;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.message-icon {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  background-color: var(--mensagens-icon);
+  transition: background-color 0.3s ease;
+}
+
+.aulas {
+  grid-area: aulas;
+  background-color: var(--aulas-bg);
+  padding: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.class-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.class-item {
+  border: 1px solid #333;
+  padding: 15px;
+  background-color: var(--aulas-item-bg);
+  transition: background-color 0.3s ease;
+}
+
+.class-header {
+  margin-bottom: 10px;
+}
+
+.class-title {
+  font-weight: bold;
+}
+
+.class-info {
+  font-size: 14px;
+  color: inherit;
+}
+
+.class-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.action-button {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--aulas-action-bg);
+  transition: background-color 0.3s ease;
+}
+
+.noticias {
+  grid-area: noticias;
+  background-color: var(--noticias-bg);
+  padding: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.news-card {
+  border: 1px solid #333;
+  padding: 20px;
+  background-color: var(--noticias-card-bg);
+  position: relative;
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color 0.3s ease;
+}
+
+.news-card::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  opacity: 0.3;
+}
+
+.news-title {
+  font-weight: bold;
+}
+
+.news-subtitle {
+  font-size: 14px;
+  color: inherit;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.page-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #bbb;
+}
+
+.page-dot.active {
+  background-color: var(--dot-active);
+  transition: background-color 0.3s ease;
+}
+
+/* Responsividade para tablets */
+@media (min-width: 768px) {
+  .container {
+    max-width: 90%;
+    margin: 15px auto;
+  }
+
+  .grid-layout {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "header header"
+      "mensagens mensagens"
+      "aulas aulas"
+      "noticias noticias";
+    gap: 15px;
+  }
+
+  .header,
+  .mensagens,
+  .aulas,
+  .noticias {
+    border-radius: 8px;
+  }
+
+  .header-item,
+  .message-item,
+  .class-item,
+  .news-card {
+    border-radius: 5px;
+  }
+
+  .message-icon,
+  .action-button {
+    border-radius: 5px;
+  }
+}
+
+/* Responsividade para desktop */
+@media (min-width: 992px) {
+  .container {
+    max-width: 1200px;
+  }
+
+  .grid-layout {
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas:
+      "header header"
+      "aulas mensagens"
+      "aulas noticias";
+    gap: 20px;
+  }
+
+  .aulas {
+    min-height: 600px;
+  }
+}
+
+/* Responsividade para telas grandes */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1400px;
+  }
+
+  .grid-layout {
+    grid-template-columns: 3fr 1fr;
+  }
+
+  .class-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+}
